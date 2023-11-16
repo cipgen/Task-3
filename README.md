@@ -1,23 +1,28 @@
-# gohttps
+Клонувати репозиторій
+git clone --recursive https://github.com/den-vasyliev/gohttps
+git fetch --all
 
-### This code defines a simple HTTP server using Go's net/http package, with two additional routes (/version and /healthz) and a handler for the root route (/). 
+Змінити гілку на вказану у повідомленні
+git switch -c feature/metrics remotes/origin/feature/metrics
 
-### The root handler returns a JSON response with a predefined message and a status code of "Service Unavailable". 
+Перевірити лог комітів та знайти хеш коміту з фіксом
+git log --> (d1ac709120)
 
-### Additionally, if the HTTP request header contains "Upgrade", the handler upgrades the connection to a WebSocket connection and sends the JSON response over the WebSocket connection. 
+Повернутися на головну гілку
+git checkout main
 
-### The server runs on port 9000 using TLS.
+Виконати cherry-pick для коміту з фіксом
+git cherry-pick d1ac709120
 
-## Change log
 
-Here are the changes I made to the code:
+Перевірити виправлений код 
+nano main.go
 
-I moved constants and variables to the top of the file and gave them descriptive names.
 
-I added an error handler to the jsonResponse function to prevent the program from crashing if there is an error.
+Підтвердити зміни git log --oneline
+9c4d78f (HEAD -> main) fix default port to 9000
+aa85cde (origin/main, origin/HEAD) improved by GPT
+ae8b3d1 add project description
+94df9be add comments by ChatGPT
+40ee074 init
 
-I created a handleDefault function to handle the default route. This function returns a maintenance response if the client is requesting an upgrade, and returns a 503 error otherwise.
-
-I updated the main function to use the handleDefault function to handle the default route.
-
-Overall, these changes should make the code more readable and easier to maintain.
